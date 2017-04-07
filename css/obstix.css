@@ -1,0 +1,165 @@
+body{
+	background-color: white;
+}
+
+#arena{
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 802px;
+	height: 520px;
+}
+
+#game-canvas{
+	-webkit-box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.1);
+	box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.1);
+	border-radius: 5px;
+	transition: opacity 3s;
+}
+
+#toast{
+	position: absolute;
+	margin-left: 100px;
+	margin-top: 20px;
+	width: 600px;
+	font: 40px fantasy;
+	text-align: center;
+	color: #ff6;
+	text-shadow: 2px 2px 4px rgb(0,0,0);
+
+	display: none;
+	opacity: 0;
+	transition: opacity 0.5s;
+	z-index: 1;
+}
+
+#fps{
+	position: absolute;
+	margin-top: -2em;
+	z-index: 1;
+	color: yellow;
+	text-shadow: 1px 1px 1px rgb(0,0,80);
+	font: bold 20px fantasy;
+
+	display: none;
+	opacity: 0;
+	transition: opacity 5s;
+}
+
+#score{
+	font: 46px fantasy;
+	text-align: center;
+	color: #ff0;
+	text-shadow: 2px 2px 4px rgba(0,0,80, 1.0);
+
+	display: none;
+	opacity: 0;
+	transition: opacity 5s;
+}
+
+.keys{
+	color: blue;
+	text-shadow: 1px 1px 1px rgba(255,255,0, 0.5);
+	background: rgba(0,0,0,0.2);
+	border-radius: 5px;
+	margin-left: 10px;
+	padding-right: 5px;
+	padding-bottom:5px;
+	display: inline;
+}
+
+#instructions{
+	margin-left: 155px;
+	padding-left: 5px;
+	padding-top: 10px;
+	height: 2em;
+	color: #ff0;
+	font-size: 0.95em;
+
+	display: none;
+	opacity: 0;
+	transition: opacity 5s;
+}
+
+.explanation{
+	color: #ff0;
+	text-shadow: 1px 1px 1px rgba(0,0,200, 0.5);
+	display: inline;
+	margin-top: 5px;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 2px;
+}
+
+#copyright{
+	float: right;
+	margin-right: 2px;
+	margin-top: -2.3em;
+	padding: 2px;
+	color: blue;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+	font-size: 0.85em;
+
+	display: none;
+	opacity: 0;
+	transition: opacity 5s;
+}
+
+#sound-and-music{
+	position: absolute;
+	margin-left: 5px;
+	margin-top: 9px;
+	color: #ff0;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+	background: rgba(0,0,0,0.1);
+	border-radius: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+
+	display: none;
+	opacity: 0;
+	transition: opacity 5s;
+}
+
+.checkbox-div{
+	display: inline;
+	text-shadow: 1px 1px 1px blue;
+}
+
+#sound-checkbox-div{
+	margin-right: 10px;
+}
+
+#loading{
+	position: absolute;
+	margin-top: 80px;
+	width: 790px;
+	font: 55px fantasy;
+	text-align: center;
+	transition: opacity 2s;
+}
+
+#loading-title{
+	padding-left: 40px;
+	padding-bottom: 30px;
+	color: #ff6;
+	text-shadow: 2px 2px 4px rbg(0,0,0);
+
+	transition: opacity 2.0s;
+	opacity: 0;
+	display: none;
+}
+
+#loading-animated-gif{
+	margin: 0 auto;
+	border: thin solid rgba(0, 0, 255, 0.7);
+	border-radius: 60px 60px 60px;
+	padding: 40px;
+	margin-top: 10px;
+
+	transition: opacity 2.0s;
+	opacity: 0;
+	display: none;
+}
+
+
