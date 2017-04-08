@@ -65,13 +65,13 @@ var SnailBait = function()
 	//Scrolling
 	this.STARTING_BACKGROUND_OFFSET = 0,
 	this.STARTING_BACKGROUND_VELOCITY = 0,
-	this.BACKGROUND_VELOCITY = 25,
+	this.BACKGROUND_VELOCITY = 15,
 	this.STARTING_PLATFORM_OFFSET = 0,
-	this.PLATFORM_VELOCITY_MULTIPLER = 4.35,
+	this.PLATFORM_VELOCITY_MULTIPLER = 0,
 	this.STARTING_SPRITE_OFFSET = 0,
 
 	//Animation
-	this.RUN_ANIMATION_RATE = 14,
+	this.RUN_ANIMATION_RATE = 20,
 
 
 	//Translation offsets
@@ -290,55 +290,6 @@ var SnailBait = function()
 			track: 1,
 			pulsate: true
 		},
-		{
-			left: 633,
-			width: 100,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(80, 140, 230)',
-			opacity: 1.0,
-			track: 1,
-			pulsate: false
-		},
-		//Screen 2
-		{
-			left: 1400,
-			width: 180,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(80, 140, 230)',
-			opacity: 1.0,
-			track: 1,
-			pulsate: false
-		},
-		//Screen 3
-		{
-			left: 1800,
-			width: 250,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(80, 140, 230)',
-			opacity: 1.0,
-			track: 1,
-			pulsate: false
-		},
-		{
-			left: 2269,
-			width: 200,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'gold',
-			opacity: 1.0,
-			track: 1,
-			pulsate: false
-		},
-		//Screen 4
-		{
-			left: 2500,
-			width: 200,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(150, 190, 255)',
-			opacity: 1.0,
-			track: 1,
-      pulsate: true,
-			snail: true
-		},
 	];
 
 	this.sapphireData = [
@@ -364,7 +315,7 @@ var SnailBait = function()
    ];
    
    this.snailData = [
-      { platformIndex: 5 },
+      { platformIndex: 0 },
       ];
 
     //Sprite Behaviours
