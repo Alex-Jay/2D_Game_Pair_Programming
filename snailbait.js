@@ -68,7 +68,7 @@ var SnailBait = function()
 	this.BACKGROUND_VELOCITY = 30, //TODO: Change speed of background according to the difficulty [Illusion of increasing speed.]
 	this.STARTING_PLATFORM_OFFSET = 0,
 	this.PLATFORM_VELOCITY_MULTIPLER = 0,
-	this.STARTING_SPRITE_OFFSET = 0,
+	this.STARTING_SPRITE_OFFSET = 50,
 
 	//Animation
 	this.RUN_ANIMATION_RATE = 20,
@@ -203,8 +203,8 @@ var SnailBait = function()
 	this.platformData = [
 	//Screen 1
 		{
-			left: 10,
-			width: 230,
+			left: 50,
+			width: 800,
 			height: this.PLATFORM_HEIGHT,
 			fillStyle: 'rgb(150, 190, 255)',
 			opacity: 1.0,
@@ -1393,11 +1393,7 @@ window.addEventListener('keydown', function(e){
   {
     return;
   }
-	if(key === snailBait.KEY_D || key === snailBait.KEY_LEFT) 
-	{
-		snailBait.turnLeft();
-	}
-	else if(key === snailBait.KEY_K || key === snailBait.KEY_RIGHT) 
+	else if(key === snailBait.KEY_RIGHT) 
 	{
 		snailBait.turnRight();
 	}
@@ -1405,7 +1401,7 @@ window.addEventListener('keydown', function(e){
 	{
 		snailBait.togglePaused();
 	}
-  else if(key === 74)
+  else if(key === 38)
   {
     snailBait.runner.jump();
   }
