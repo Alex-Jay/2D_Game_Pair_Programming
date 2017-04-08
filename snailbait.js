@@ -13,6 +13,8 @@ var SnailBait = function()
 	this.loadingTitleElement = document.getElementById('loading-title'),
 	this.loadingAnimatedGIFElement = document.getElementById('loading-animated-gif'),
 
+  //Score
+  this.score = 0;
   //Time
   this.playing = true;
   this.timeSystem = new TimeSystem();
@@ -210,7 +212,7 @@ var SnailBait = function()
 			fillStyle: 'rgb(150, 190, 255)',
 			opacity: 1.0,
 			track: 1,
-			pulsate: true
+			pulsate: false
 		},
 	];
 
@@ -699,8 +701,8 @@ SnailBait.prototype =
   equipRunnerForJumping: function()
   {
     var INITIAL_TRACK = 1,
-        RUNNER_JUMP_HEIGHT = 120,
-        RUNNER_JUMP_DURATION = 1000,
+        RUNNER_JUMP_HEIGHT = 80,
+        RUNNER_JUMP_DURATION = 500,
         EASING_FACTOR = 1.1;
 
     this.runner.JUMP_HEIGHT = RUNNER_JUMP_HEIGHT;
@@ -888,6 +890,9 @@ SnailBait.prototype =
 	{
     //Replace the time passed to animate by the browser
     //with our own game time
+    this.score++;
+    console.log(this.score);
+    snailBait.scoreElement.innerHTML = this.score;
     now = snailBait.timeSystem.calculateGameTime();
 		if(snailBait.paused)
 		{
@@ -1343,7 +1348,9 @@ SnailBait.prototype =
    {
       var TIME_RESET_DELAY = 1000,
           RUN_DELAY = 500;
+      //localStorage.setItem('score', score); //TODO: Save and Load Score. But first fix score adding
       snailBait.reset();
+      score = 0;
       setTimeout(function(){
         snailBait.setTimeRate(1.0);
         setTimeout(function(){
