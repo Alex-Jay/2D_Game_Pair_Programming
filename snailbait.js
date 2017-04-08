@@ -38,8 +38,6 @@ var SnailBait = function()
 	this.STARTING_RUNNER_TRACK = 1,
 
 	this.TRACK_1_BASELINE = 323,
-	this.TRACK_2_BASELINE = 223,
-	this.TRACK_3_BASELINE = 123,
 
 	this.SHORT_DELAY = 50,
 	this.OPAQUE = 1.0,
@@ -261,38 +259,17 @@ var SnailBait = function()
    // Sprite data.......................................................
 
    this.coinData = [
-      { left: 270,  
-         top: this.TRACK_2_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
-      { left: 489,  
-         top: this.TRACK_3_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
       { left: 620,  
          top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
 
-      { left: 833,  
-         top: this.TRACK_2_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
-      { left: 1050, 
-         top: this.TRACK_2_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
       { left: 1450, 
          top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
-      { left: 1670, 
-         top: this.TRACK_2_BASELINE - this.COIN_CELLS_HEIGHT }, 
 
       { left: 1870, 
          top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
 
       { left: 1930, 
          top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
-      { left: 2200, 
-         top: this.TRACK_2_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
-      { left: 2320, 
-         top: this.TRACK_2_BASELINE - this.COIN_CELLS_HEIGHT }, 
 
       { left: 2360, 
          top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
@@ -314,24 +291,6 @@ var SnailBait = function()
 			pulsate: true
 		},
 		{
-			left: 250,
-			width: 100,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(150, 190, 255)',
-			opacity: 1.0,
-			track: 2,
-			pulsate: false
-		},
-		{
-			left: 400,
-			width: 125,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(250, 0, 0)',
-			opacity: 1.0,
-			track: 3,
-			pulsate: false
-		},
-		{
 			left: 633,
 			width: 100,
 			height: this.PLATFORM_HEIGHT,
@@ -341,33 +300,6 @@ var SnailBait = function()
 			pulsate: false
 		},
 		//Screen 2
-		{
-			left: 810,
-			width: 100,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(200, 200, 0)',
-			opacity: 1.0,
-			track: 2,
-			pulsate: false
-		},
-		{
-			left: 1025,
-			width: 100,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(80, 140, 230)',
-			opacity: 1.0,
-			track: 2,
-			pulsate: false
-		},
-		{
-			left: 1200,
-			width: 125,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'aqua',
-			opacity: 1.0,
-			track: 3,
-			pulsate: false
-		},
 		{
 			left: 1400,
 			width: 180,
@@ -379,39 +311,12 @@ var SnailBait = function()
 		},
 		//Screen 3
 		{
-			left: 1625,
-			width: 100,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(200, 200, 0)',
-			opacity: 1.0,
-			track: 2,
-			pulsate: false
-		},
-		{
 			left: 1800,
 			width: 250,
 			height: this.PLATFORM_HEIGHT,
 			fillStyle: 'rgb(80, 140, 230)',
 			opacity: 1.0,
 			track: 1,
-			pulsate: false
-		},
-		{
-			left: 2000,
-			width: 100,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'rgb(200, 200, 80)',
-			opacity: 1.0,
-			track: 2,
-			pulsate: false
-		},
-		{
-			left: 2100,
-			width: 100,
-			height: this.PLATFORM_HEIGHT,
-			fillStyle: 'aqua',
-			opacity: 1.0,
-			track: 3,
 			pulsate: false
 		},
 		{
@@ -430,7 +335,7 @@ var SnailBait = function()
 			height: this.PLATFORM_HEIGHT,
 			fillStyle: 'rgb(150, 190, 255)',
 			opacity: 1.0,
-			track: 2,
+			track: 1,
       pulsate: true,
 			snail: true
 		},
@@ -439,12 +344,6 @@ var SnailBait = function()
 	this.sapphireData = [
       { left: 70,  
          top: this.TRACK_1_BASELINE - this.SAPPHIRE_CELLS_HEIGHT },
-
-      { left: 880,  
-         top: this.TRACK_2_BASELINE - this.SAPPHIRE_CELLS_HEIGHT },
-
-      { left: 1100, 
-         top: this.TRACK_2_BASELINE - this.SAPPHIRE_CELLS_HEIGHT }, 
 
       { left: 1475, 
          top: this.TRACK_1_BASELINE - this.SAPPHIRE_CELLS_HEIGHT },
@@ -456,22 +355,16 @@ var SnailBait = function()
    this.rubyData = [
       { left: 690,  
          top: this.TRACK_1_BASELINE - this.RUBY_CELLS_HEIGHT },
-
-      { left: 1700, 
-         top: this.TRACK_2_BASELINE - this.RUBY_CELLS_HEIGHT },
-
-      { left: 2056, 
-         top: this.TRACK_2_BASELINE - this.RUBY_CELLS_HEIGHT },
    ];
 
    this.smokingHoleData = [
-      { left: 248,  top: this.TRACK_2_BASELINE - 22 },
-      { left: 688,  top: this.TRACK_3_BASELINE + 5 },
-      { left: 1352,  top: this.TRACK_2_BASELINE - 18 },
+      { left: 248,  top: this.TRACK_1_BASELINE - 22 },
+      { left: 688,  top: this.TRACK_1_BASELINE + 5 },
+      { left: 1352,  top: this.TRACK_1_BASELINE - 18 },
    ];
    
    this.snailData = [
-      { platformIndex: 13 },
+      { platformIndex: 5 },
       ];
 
     //Sprite Behaviours
@@ -579,8 +472,7 @@ var SnailBait = function()
     };
 
     //Runner Jump Behaviour
-    this.jumpBehaviour = 
-    {
+    this.jumpBehaviour = {
       pause: function(sprite, now)
       {
         if(sprite.ascendTimer.isRunning())
@@ -1450,14 +1342,6 @@ SnailBait.prototype =
 		if(track === 1)
 		{
 			return snailBait.TRACK_1_BASELINE;
-		}
-		else if(track === 2)
-		{
-			return snailBait.TRACK_2_BASELINE;
-		}
-		else if(track === 3)
-		{
-			return snailBait.TRACK_3_BASELINE;
 		}
 	},
 
