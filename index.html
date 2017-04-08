@@ -1,46 +1,54 @@
-<!-- Game Written By Alex Jevdokimov-->
-<!--Some Code Was Retained From 2D Engine Classes-->
+<!-- This game code was written by David Geary author of the book Core html5 Game Programming-->
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Obstrix | Main</title>
-		<link rel='stylesheet' href='css/obstix.css'/>
-	</head>
+<head>
+	<title>Obstrix</title>
+	<link rel='stylesheet' href='css/obstrix.css'/>
+</head>
+<body>
+<div id = 'arena'>
+<!-- Fps and Score TOP CHROME -->
+<div id = 'score'>0</div>
+<div id = 'fps'></div>
+<div id = 'toast'></div>
+<!-- Loading screen ..........-->
+<div id='loading'>
+	<div id='loading-title'>Loading...</div>
+	<img id='loading-animated-gif'/>
+</div>
+<canvas id='game-canvas' width='800' height = '400'>
+</canvas>
+<!-- Bottom CHROME -->
+<!-- Sound and Music .................-->
+<div id='sound-and-music'>
+<div id='sound-checkbox-div' class = 'checkbox-div'>
+Sound <input id='sound-checkbox' type='checkbox' checked/>
+</div>
+<div id='music-checkbox-div' class = 'checkbox-div'>
+Music <input id='music-checkbox' type='checkbox' checked/>
+</div>
+</div>
+<!--Instructions for game controls.........-->
+<div id = 'instructions'>
+<div class = 'keys'>
+&larr; / d <div class='explanation'>move left</div>
+&rarr; / k <div class='explanation'>move right</div>
+j <div class='explanation'>jump</div>
+p <div class='explanation'>pause</div>
+</div>
+</div>
+<!--Copyright..................-->
+<div id='copyright'>&copy; 2017 Aleksandrs Jevdokimovs + David Geary</div>
+</div>
+<script src = 'js/sprites.js'></script>
+<script src = 'js/cycle.js'></script>
+<script src = 'js/stopwatch.js'></script>
+<script src = 'js/animationTimer.js'></script>
+<script src = 'js/bounce.js'></script>
+<script src = 'js/pulse.js'></script>
+<script src = 'js/cellSwitch.js'></script>
+<script src = 'timeSystem.js'></script>
+<script src = 'snailbait.js'></script>
 
-	<body>
-		<div id = 'arena'>
-		<!-- Fps and Score TOP CHROME -->
-		<div id = 'score'>0</div>
-		<div id = 'fps'></div>
-		<div id = 'toast'></div>
-		<!-- Loading screen ..........-->
-		<div id='loading'>
-			<div id='loading-title'>Loading...</div>
-			<img id='loading-animated-gif'/>
-		</div>
-		<canvas id='game-canvas' width='800' height = '400'>
-		</canvas>
-		<!-- Bottom CHROME -->
-		<!-- Sound and Music .................-->
-		<div id='sound-and-music'>
-			<div id='sound-checkbox-div' class = 'checkbox-div'>
-				Sound <input id='sound-checkbox' type='checkbox' checked/>
-			</div>
-			<div id='music-checkbox-div' class = 'checkbox-div'>
-			Music <input id='music-checkbox' type='checkbox' checked/>
-			</div>
-		</div>
-		<!--Instructions for game controls.........-->
-		<div id = 'instructions'>
-			<div class = 'keys'>
-			&larr; / d <div class='explanation'>move left</div>
-			&rarr; / k <div class='explanation'>move right</div>
-			j <div class='explanation'>jump</div>
-			p <div class='explanation'>pause</div>
-			</div>
-		</div>
-		<!--Copyright..................-->
-		<div id='copyright'>&copy; 2017 Aleksandrs Jevdokimovs</div>
-		</div>
-	</body>
+</body>
 </html>
