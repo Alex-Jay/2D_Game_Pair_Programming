@@ -65,7 +65,7 @@ var SnailBait = function()
 	//Scrolling
 	this.STARTING_BACKGROUND_OFFSET = 0,
 	this.STARTING_BACKGROUND_VELOCITY = 0,
-	this.BACKGROUND_VELOCITY = 15,
+	this.BACKGROUND_VELOCITY = 30, //TODO: Change speed of background according to the difficulty [Illusion of increasing speed.]
 	this.STARTING_PLATFORM_OFFSET = 0,
 	this.PLATFORM_VELOCITY_MULTIPLER = 0,
 	this.STARTING_SPRITE_OFFSET = 0,
@@ -92,17 +92,8 @@ var SnailBait = function()
 
    this.RUNNER_CELLS_WIDTH = 40; // pixels
    this.RUNNER_CELLS_HEIGHT = 48;
-
-   this.COIN_CELLS_HEIGHT = 30;
-   this.COIN_CELLS_WIDTH  = 30;
    
    this.EXPLOSION_CELLS_HEIGHT = 62;
-
-   this.RUBY_CELLS_HEIGHT = 30;
-   this.RUBY_CELLS_WIDTH = 35;
-
-   this.SAPPHIRE_CELLS_HEIGHT = 30;
-   this.SAPPHIRE_CELLS_WIDTH  = 35;
 
    this.SNAIL_BOMB_CELLS_HEIGHT = 20;
    this.SNAIL_BOMB_CELLS_WIDTH  = 20;
@@ -110,15 +101,6 @@ var SnailBait = function()
    this.SNAIL_CELLS_HEIGHT = 34;
    this.SNAIL_CELLS_WIDTH  = 64;
    this.SNAIL_PACE_VELOCITY = 80;
-   
-   this.blueCoinCells = [
-      { left: 5, top: 540, width: this.COIN_CELLS_WIDTH, 
-                           height: this.COIN_CELLS_HEIGHT },
-
-      { left: 5 + this.COIN_CELLS_WIDTH, top: 540,
-        width: this.COIN_CELLS_WIDTH, 
-        height: this.COIN_CELLS_HEIGHT }
-   ];
 
    this.explosionCells = [
       { left: 3,   top: 48, 
@@ -138,32 +120,6 @@ var SnailBait = function()
    ];
 
    // Sprite sheet cells................................................
-
-   this.goldCoinCells = [
-      { left: 65, top: 540, width: this.COIN_CELLS_WIDTH, 
-                            height: this.COIN_CELLS_HEIGHT },
-      { left: 96, top: 540, width: this.COIN_CELLS_WIDTH, 
-                            height: this.COIN_CELLS_HEIGHT },
-      { left: 128, top: 540, width: this.COIN_CELLS_WIDTH, 
-                             height: this.COIN_CELLS_HEIGHT },
-   ];
-
-   this.rubyCells = [
-      { left: 3,   top: 138, width: this.RUBY_CELLS_WIDTH,
-                             height: this.RUBY_CELLS_HEIGHT },
-
-      { left: 39,  top: 138, width: this.RUBY_CELLS_WIDTH, 
-                             height: this.RUBY_CELLS_HEIGHT },
-
-      { left: 76,  top: 138, width: this.RUBY_CELLS_WIDTH, 
-                             height: this.RUBY_CELLS_HEIGHT },
-
-      { left: 112, top: 138, width: this.RUBY_CELLS_WIDTH, 
-                             height: this.RUBY_CELLS_HEIGHT },
-
-      { left: 148, top: 138, width: this.RUBY_CELLS_WIDTH, 
-                             height: this.RUBY_CELLS_HEIGHT }
-   ];
 
    this.runnerCellsRight = [
       { left: 4, top: 311, 
@@ -223,23 +179,6 @@ var SnailBait = function()
          width: 38, height: this.RUNNER_CELLS_HEIGHT },
    ],
 
-   this.sapphireCells = [
-      { left: 185,   top: 138, width: this.SAPPHIRE_CELLS_WIDTH,
-                             height: this.SAPPHIRE_CELLS_HEIGHT },
-
-      { left: 220,  top: 138, width: this.SAPPHIRE_CELLS_WIDTH, 
-                             height: this.SAPPHIRE_CELLS_HEIGHT },
-
-      { left: 258,  top: 138, width: this.SAPPHIRE_CELLS_WIDTH, 
-                             height: this.SAPPHIRE_CELLS_HEIGHT },
-
-      { left: 294, top: 138, width: this.SAPPHIRE_CELLS_WIDTH, 
-                             height: this.SAPPHIRE_CELLS_HEIGHT },
-
-      { left: 331, top: 138, width: this.SAPPHIRE_CELLS_WIDTH, 
-                             height: this.SAPPHIRE_CELLS_HEIGHT }
-   ];
-
    this.snailBombCells = [
       { left: 40, top: 512, width: 30, height: 20 },
       { left: 2, top: 512, width: 30, height: 20 }
@@ -258,24 +197,6 @@ var SnailBait = function()
 
    // Sprite data.......................................................
 
-   this.coinData = [
-      { left: 620,  
-         top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
-      { left: 1450, 
-         top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
-      { left: 1870, 
-         top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
-      { left: 1930, 
-         top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
-
-      { left: 2360, 
-         top: this.TRACK_1_BASELINE - this.COIN_CELLS_HEIGHT }, 
-   ];  
-
-
 	//Platforms
 	//Investigate writing a function which will generate random 
 	//positions and fillStyles for the platforms
@@ -291,22 +212,6 @@ var SnailBait = function()
 			pulsate: true
 		},
 	];
-
-	this.sapphireData = [
-      { left: 70,  
-         top: this.TRACK_1_BASELINE - this.SAPPHIRE_CELLS_HEIGHT },
-
-      { left: 1475, 
-         top: this.TRACK_1_BASELINE - this.SAPPHIRE_CELLS_HEIGHT },
-
-      { left: 2400, 
-         top: this.TRACK_1_BASELINE - this.SAPPHIRE_CELLS_HEIGHT },
-   ];
-
-   this.rubyData = [
-      { left: 690,  
-         top: this.TRACK_1_BASELINE - this.RUBY_CELLS_HEIGHT },
-   ];
 
    this.smokingHoleData = [
       { left: 248,  top: this.TRACK_1_BASELINE - 22 },
@@ -595,11 +500,6 @@ var SnailBait = function()
           //console.log("Jump platform collision");
           this.processPlatformCollisionDuringJump(sprite, otherSprite);
         }
-        else if('coin' === otherSprite.type || 'sapphire' === otherSprite.type || 'ruby' === otherSprite.type)
-        {
-          //console.log("Good collision");
-          otherSprite.visible = false;
-        }
         if('snail bomb' === otherSprite.type)
         {
           //console.log("Bad collision");
@@ -726,10 +626,7 @@ var SnailBait = function()
 	//Sprites
 	//This costs more memory but is faster to iterate through all of the sprites of a particular type
 	this.sprites = [];
-	this.coins = [];
 	this.platforms = [];
-  this.rubies = [];
- 	this.sapphires = [];
  	this.snails = [];
 
 	this.platformArtist = 
@@ -758,10 +655,7 @@ SnailBait.prototype =
 	createSprites: function()
 	{
 		this.createPlatformSprites();
-		this.createCoinSprites();
 		this.createRunnerSprite	();
-		this.createRubySprites();
-		this.createSapphireSprites();
 		this.createSnailSprites();
 		this.initializeSprites();
 		//Add all of the sprites to a single array
@@ -779,18 +673,6 @@ SnailBait.prototype =
 		{
 			this.sprites.push(this.platforms[i]);
 		}
-		for(var i =0; i < this.coins.length; ++i)
-		{
-			this.sprites.push(this.coins[i]);
-		}
-		for(var i =0; i < this.rubies.length; ++i)
-		{
-			this.sprites.push(this.rubies[i]);
-		}
-		for(var i =0; i < this.sapphires.length; ++i)
-		{
-			this.sprites.push(this.sapphires[i]);
-		}
 		for(var i =0; i < this.snails.length; ++i)
 		{
 			this.sprites.push(this.snails[i]);
@@ -801,9 +683,6 @@ SnailBait.prototype =
 
 	initializeSprites: function()
 	{
-		this.positionSprites(this.coins, this.coinData);
-		this.positionSprites(this.rubies, this.rubyData);
-		this.positionSprites(this.sapphires, this.sapphireData);
 		this.positionSprites(this.snails, this.snailData);
 
     this.equipRunner();
@@ -943,30 +822,6 @@ SnailBait.prototype =
     return platformUnderneath;
   },
 
-	createCoinSprites: function()
-	{
-		var coin,
-        COIN_SPARKLE_DURATION = 300,
-        COIN_SPARKLE_INTERVAL = 600,
-        BOUNCE_DURATION_BASE = 800,
-        BOUNCE_HEIGHT_BASE = 50;
-		for(var i=0; i<this.coinData.length;++i)
-		{
-			if(i%2 === 0)
-			{
-				coin = new Sprite('coin', new SpriteSheetArtist(this.spritesheet, this.goldCoinCells), [new CycleBehaviour(COIN_SPARKLE_DURATION, COIN_SPARKLE_INTERVAL), new BounceBehaviour(BOUNCE_DURATION_BASE + BOUNCE_DURATION_BASE*Math.random(), BOUNCE_HEIGHT_BASE + BOUNCE_HEIGHT_BASE*Math.random())]);
-			}
-			else
-			{
-				coin = new Sprite('coin', new SpriteSheetArtist(this.spritesheet, this.blueCoinCells), [new CycleBehaviour(COIN_SPARKLE_DURATION, COIN_SPARKLE_INTERVAL), new BounceBehaviour(BOUNCE_DURATION_BASE + BOUNCE_DURATION_BASE*Math.random(), BOUNCE_HEIGHT_BASE + BOUNCE_HEIGHT_BASE*Math.random())]);
-			}
-			coin.width = this.COIN_CELLS_WIDTH;
-			coin.height = this.COIN_CELLS_HEIGHT;
-			coin.value = 50;
-			this.coins.push(coin);
-		}
-	},
-
 	createPlatformSprites: function()
 	{
 		var sprite, pd,
@@ -991,37 +846,6 @@ SnailBait.prototype =
       }
 
 			this.platforms.push(sprite);
-		}
-	},
-
-	createRubySprites: function()
-	{
-		var ruby,
-        RUBY_SPARKLE_DURATION = 100,
-        RUBY_SPARKLE_INTERVAL = 500;
-
-		for(var i=0; i<this.rubyData.length;++i)
-		{
-			ruby = new Sprite('ruby', new SpriteSheetArtist(this.spritesheet, this.rubyCells), [new CycleBehaviour(RUBY_SPARKLE_DURATION, RUBY_SPARKLE_INTERVAL)]);
-			ruby.width = this.RUBY_CELLS_WIDTH;
-			ruby.height = this.RUBY_CELLS_HEIGHT;
-			ruby.value = 200;
-			this.rubies.push(ruby);
-		}
-	},
-
-	createSapphireSprites: function()
-	{
-		var sapphire,
-        SAPPHIRE_SPARKLE_DURATION = 150,
-        SAPPHIRE_SPARKLE_INTERVAL = 750;
-		for(var i=0; i<this.sapphireData.length;++i)
-		{
-			sapphire = new Sprite('sapphire', new SpriteSheetArtist(this.spritesheet, this.sapphireCells), [new CycleBehaviour(SAPPHIRE_SPARKLE_DURATION, SAPPHIRE_SPARKLE_INTERVAL)]);
-			sapphire.width = this.SAPPHIRE_CELLS_WIDTH;
-			sapphire.height = this.SAPPHIRE_CELLS_HEIGHT;
-			sapphire.value = 100;
-			this.sapphires.push(sapphire);
 		}
 	},
 
