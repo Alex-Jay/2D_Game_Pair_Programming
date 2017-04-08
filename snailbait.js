@@ -94,7 +94,7 @@ var SnailBait = function()
  // Sprite sheet cells................................................
 
    this.RUNNER_CELLS_WIDTH = 40; // pixels
-   this.RUNNER_CELLS_HEIGHT = 50;
+   this.RUNNER_CELLS_HEIGHT = 48;
 
    this.BAT_CELLS_HEIGHT = 34; // Bat cell width varies; not constant 
 
@@ -225,61 +225,61 @@ var SnailBait = function()
    ];
 
    this.runnerCellsRight = [
-      { left: 3, top: 308, 
-        width: 40, height: this.RUNNER_CELLS_HEIGHT },
+      { left: 4, top: 311, 
+        width: 37, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 41, top: 308, 
-         width: 44, height: this.RUNNER_CELLS_HEIGHT },
+      { left: 47, top: 311, 
+         width: 39, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 90, top: 308, 
-         width: 41, height: this.RUNNER_CELLS_HEIGHT },
+      { left: 91, top: 311, 
+         width: 39, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 132, top: 308, 
-         width: 46, height: this.RUNNER_CELLS_HEIGHT },
-
-      { left: 182, top: 308, 
+      { left: 134, top: 311, 
          width: 45, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 231, top: 308, 
-         width: 39, height: this.RUNNER_CELLS_HEIGHT },
+      { left: 184, top: 311, 
+         width: 44, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 277,  top: 308, 
-         width: 39, height: this.RUNNER_CELLS_HEIGHT },
+      { left: 233, top: 311, 
+         width: 38, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 321,  top: 308, 
+      { left: 279,  top: 311, 
+         width: 37, height: this.RUNNER_CELLS_HEIGHT },
+
+      { left: 323,  top: 311, 
          width: 41, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 418,   top: 308, 
+      { left: 419,   top: 311, 
          width: 42, height: this.RUNNER_CELLS_HEIGHT }
    ],
 
    this.runnerCellsLeft = [
-      { left: 3,   top: 390, 
-         width: 47, height: this.RUNNER_CELLS_HEIGHT },
+      { left: 4,   top: 391, 
+         width: 41, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 51,  top: 390, 
-         width: 44, height: this.RUNNER_CELLS_HEIGHT },
-
-      { left: 100, top: 390, 
-         width: 39, height: this.RUNNER_CELLS_HEIGHT },
-
-      { left: 147, top: 395, 
-         width: 46, height: this.RUNNER_CELLS_HEIGHT },
-
-      { left: 192, top: 390, 
-         width: 49, height: this.RUNNER_CELLS_HEIGHT },
-
-      { left: 235, top: 390, 
-         width: 46, height: this.RUNNER_CELLS_HEIGHT },
-
-      { left: 385, top: 390, 
+      { left: 53,  top: 391, 
          width: 42, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 334, top: 390, 
-         width: 35, height: this.RUNNER_CELLS_HEIGHT },
+      { left: 102, top: 391, 
+         width: 40, height: this.RUNNER_CELLS_HEIGHT },
 
-      { left: 422, top: 390, 
-         width: 35, height: this.RUNNER_CELLS_HEIGHT },
+      { left: 148, top: 391, 
+         width: 38, height: this.RUNNER_CELLS_HEIGHT },
+
+      { left: 194, top: 391, 
+         width: 38, height: this.RUNNER_CELLS_HEIGHT },
+
+      { left: 237, top: 391, 
+         width: 44, height: this.RUNNER_CELLS_HEIGHT },
+
+      { left: 286, top: 391, 
+         width: 44, height: this.RUNNER_CELLS_HEIGHT },
+
+      { left: 335, top: 391, 
+         width: 39, height: this.RUNNER_CELLS_HEIGHT },
+
+      { left: 423, top: 391, 
+         width: 38, height: this.RUNNER_CELLS_HEIGHT },
    ],
 
    this.sapphireCells = [
