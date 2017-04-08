@@ -3,6 +3,7 @@ var SnailBait = function()
 	this.canvas = document.getElementById('game-canvas'),
 	this.context = this.canvas.getContext('2d'),
 	this.fpsElement = document.getElementById('fps'),
+  this.fpsWarningElement = document.getElementById('fps-warning'),
 	this.toastElement = document.getElementById('toast'),
 	this.instructionElement = document.getElementById('instructions'),
 	this.copyrightElement = document.getElementById('copyright'),
@@ -897,6 +898,10 @@ SnailBait.prototype =
 		else
 		{
 			fps = snailBait.calculateFps(now);
+      //if(fps < 50)
+      //{
+      //  snailBait.fpsWarningElement.innerHTML = "FPS Low / Under X"; 
+      //}
 			snailBait.draw(now);
 			snailBait.lastAnimationFrameTime = now;
 			requestAnimationFrame(snailBait.animate);
