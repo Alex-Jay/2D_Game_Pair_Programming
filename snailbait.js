@@ -68,7 +68,8 @@
 	//Scrolling
 	this.STARTING_BACKGROUND_OFFSET = 0,
 	this.STARTING_BACKGROUND_VELOCITY = 0,
-	this.BACKGROUND_VELOCITY = 30, //TODO: Change speed of background according to the difficulty [Illusion of increasing speed.]
+	this.BACKGROUND_VELOCITY = 200,
+	this.SPEED_UP_RATE = 0.03,
 	this.STARTING_PLATFORM_OFFSET = 0,
 	this.PLATFORM_VELOCITY_MULTIPLER = 0,
 	this.STARTING_SPRITE_OFFSET = 50,
@@ -890,7 +891,10 @@ SnailBait.prototype =
     //Replace the time passed to animate by the browser
     //with our own game time
     //console.log(this.score);
+    //console.log(snailBait.BACKGROUND_VELOCITY);
+    //Draw Score on screen every frame
     this.snailBait.scoreElement.innerHTML = this.score;
+
     now = snailBait.timeSystem.calculateGameTime();
 		if(snailBait.paused)
 		{
@@ -901,7 +905,13 @@ SnailBait.prototype =
 		else
 		{
 			fps = snailBait.calculateFps(now);
+
+			//Increment Score every frame.
 			this.score++;
+
+			//Speed up background velocity.
+			snailBait.speedUp();
+
       //if(fps < 50)
       //{
       //  snailBait.fpsWarningElement.innerHTML = "FPS Low / Under X"; 
@@ -965,6 +975,9 @@ SnailBait.prototype =
 		//this.togglePaused();
 		this.revealGame();
 		this.revealInitialToast();
+		//Initially Sets the player to move right
+		snailBait.turnRight();
+		snailBait.putSpriteOnTrack(snailBait.runner, 1);
     this.timeSystem.start();
     //this.setTimeRate(0.5);
     this.gameStarted = true;
@@ -1151,6 +1164,13 @@ SnailBait.prototype =
 		snailBait.bgVelocity = snailBait.BACKGROUND_VELOCITY;
 		this.runner.runAnimationRate = this.RUN_ANIMATION_RATE;
 		this.runner.artist.cells = this.runnerCellsRight;
+	},
+
+	speedUp: function()
+	{
+
+		snailBait.BACKGROUND_VELOCITY = snailBait.BACKGROUND_VELOCITY + snailBait.SPEED_UP_RATE;
+		snailBait.bgVelocity = snailBait.BACKGROUND_VELOCITY;
 	},
 
 	setPlatformVelocity: function()
@@ -1351,6 +1371,7 @@ SnailBait.prototype =
       //localStorage.setItem('score', score); //TODO: Save and Load Score. But first fix score adding
       snailBait.reset();
       score = 0;
+      snailBait.turnRight();
       setTimeout(function(){
         snailBait.setTimeRate(1.0);
         setTimeout(function(){
@@ -1407,7 +1428,7 @@ window.addEventListener('keydown', function(e){
   }
 	else if(key === snailBait.KEY_RIGHT) 
 	{
-		snailBait.turnRight();
+		//snailBait.turnRight();
 	}
 	else if(key === snailBait.KEY_P)
 	{
