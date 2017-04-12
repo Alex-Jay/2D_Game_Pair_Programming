@@ -40,7 +40,6 @@
 
   this.RUNNER_EXPOSION_DURATION = 500,
   this.BAD_GUYS_EXPLOSION_DURATION = 1500,
-
 	this.STARTING_RUNNER_TRACK = 1,
 
 	this.TRACK_1_BASELINE = 323,
@@ -223,9 +222,11 @@
 	];
 
 	this.boxData = [
-      { left: 600,  
+      { left: 1900,  
          top: this.TRACK_1_BASELINE - 39},
-      { left: 400,  
+      { left: 2700,  
+         top: this.TRACK_1_BASELINE - 39},
+      { left: 3600,  
          top: this.TRACK_1_BASELINE - 39},
    ];
 
@@ -939,11 +940,25 @@ SnailBait.prototype =
 
 			//Speed up background velocity.
 			snailBait.speedUp();
-			console.log(snailBait.sprites);
+			//console.log(snailBait.sprites);
 			snailBait.sprites[4].left -= snailBait.BOX_MOVEMENT_SPEED;
 			snailBait.sprites[5].left -= snailBait.BOX_MOVEMENT_SPEED;
+			snailBait.sprites[6].left -= snailBait.BOX_MOVEMENT_SPEED;
 
+			if(snailBait.sprites[4].left < -100)
+			{
+				snailBait.sprites[4].left = snailBait.sprites[6].left + Math.floor((Math.random() * 700) + 800);
+			}
 
+			if(snailBait.sprites[5].left < -100)
+			{
+				snailBait.sprites[5].left = snailBait.sprites[4].left + Math.floor((Math.random() * 500) + 700);
+			}
+
+			if(snailBait.sprites[6].left < -100)
+			{
+				snailBait.sprites[6].left = snailBait.sprites[5].left + Math.floor((Math.random() * 500) + 900);
+			}
       //if(fps < 50)
       //{
       //  snailBait.fpsWarningElement.innerHTML = "FPS Low / Under X"; 
@@ -1028,7 +1043,7 @@ SnailBait.prototype =
 
 	revealGame: function()
 	{
-		var DIM_CONTROLS_DELAY = 5000;
+		var DIM_CONTROLS_DELAY = 300;
 		this.revealTopChromeDimmed();
 		this.revealCanvas();
 		this.revealBottomChrome();
@@ -1074,8 +1089,8 @@ SnailBait.prototype =
 
 	revealInitialToast: function()
 	{
-		var INITIAL_TOAST_DELAY = 1500,
-		    INITIAL_TOAST_DURATION = 3000;
+		var INITIAL_TOAST_DELAY = 200,
+		    INITIAL_TOAST_DURATION = 1500;
 		setTimeout(function(){
 			snailBait.revealToast('Jump over the obstacles.', INITIAL_TOAST_DURATION);
 		}, INITIAL_TOAST_DELAY);
@@ -1400,11 +1415,16 @@ SnailBait.prototype =
    endLifeTransition: function()
    {
       var TIME_RESET_DELAY = 1000,
-          RUN_DELAY = 500;
+          RUN_DELAY = 200;
       //localStorage.setItem('score', score); //TODO: Save and Load Score. But first fix score adding
       snailBait.reset();
       score = 0;
+      snailBait.BACKGROUND_VELOCITY = 100;
       snailBait.turnRight();
+      snailBait.sprites[2].left = 0;
+      snailBait.sprites[4].left = 1900;
+      snailBait.sprites[5].left = 2600;
+      snailBait.sprites[6].left = 3700;
       setTimeout(function(){
         snailBait.setTimeRate(1.0);
         setTimeout(function(){
