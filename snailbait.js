@@ -4,11 +4,11 @@
 	this.context = this.canvas.getContext('2d'),
 	this.fpsElement = document.getElementById('fps'),
   	this.fpsWarningElement = document.getElementById('fps-warning'),
+  	this.highScoreElement = document.getElementById('highScore'),
 	this.toastElement = document.getElementById('toast'),
 	this.instructionElement = document.getElementById('instructions'),
 	this.copyrightElement = document.getElementById('copyright'),
 	this.scoreElement = document.getElementById('score'),
-	this.soundAndMusicElement = document.getElementById('sound-and-music'),
 	this.loadingElement = document.getElementById('loading'),
 	this.loadingTitleElement = document.getElementById('loading-title'),
 	this.loadingAnimatedGIFElement = document.getElementById('loading-animated-gif');
@@ -17,7 +17,7 @@
   score = 0;
 
   		//Set Highscore Text
-		this.fpsWarningElement.innerHTML = "Highscore: "; 
+		this.highScoreElement.innerHTML = "Highscore: "; 
 
   //Box Movement Speed
   this.BOX_MOVEMENT_SPEED = 5;
@@ -816,7 +816,6 @@ SnailBait.prototype =
     //console.log(this.score);
     //console.log(snailBait.BACKGROUND_VELOCITY);
     //Draw Score on screen every frame
-    this.snailBait.scoreElement.innerHTML = this.score;
 
     now = snailBait.timeSystem.calculateGameTime();
 		if(snailBait.paused)
@@ -829,8 +828,10 @@ SnailBait.prototype =
 		{
 			fps = snailBait.calculateFps(now);
 
-			//Increment Score every frame.
+			//Increment and Write Score every frame.
 			this.score++;
+			this.snailBait.scoreElement.innerHTML = this.score;
+			
 
 			//console.log(snailBait.sprites);
 			snailBait.sprites[2].left -= snailBait.BOX_MOVEMENT_SPEED;
@@ -855,12 +856,13 @@ SnailBait.prototype =
 			//Speed up background velocity.
 			snailBait.speedUp();
 
-			snailBait.fpsWarningElement.innerHTML = "Highscore: " + localStorage.getItem('score');
+			snailBait.highScoreElement.innerHTML = "Highscore: " + localStorage.getItem('score');
 
-      //if(fps < 50)
-      //{
-      //  snailBait.fpsWarningElement.innerHTML = "FPS Low / Under X"; 
-      //}
+		      if(fps <= 30 && snailBait.playing === true)
+		      {
+		        snailBait.revealToast("FPS Low. Problems Might Occur", 3000);
+		      }
+
 			snailBait.draw(now);
 			snailBait.lastAnimationFrameTime = now;
 			requestAnimationFrame(snailBait.animate);
@@ -877,6 +879,11 @@ SnailBait.prototype =
 			snailBait.fpsElement.innerHTML = fps.toFixed(0) + ' fps'; 
 		}
 		return fps;
+	},
+
+	stopScore: function()
+	{
+		return this.score;
 	},
 
 	initializeImages: function()
@@ -971,14 +978,13 @@ SnailBait.prototype =
 
 	revealBottomChrome: function()
 	{
-		this.fadeInElements(this.soundAndMusicElement, this.instructionElement, this.copyrightElement);
+		this.fadeInElements(this.instructionElement, this.copyrightElement);
 	},
 
 	dimControls: function()
 	{
 		var FINAL_OPACITY = 0.5;
 		snailBait.instructionElement.style.opacity = FINAL_OPACITY;
-		snailBait.soundAndMusicElement.style.opacity = FINAL_OPACITY;
 	},
 
 	revealTopChrome: function()
@@ -1174,7 +1180,7 @@ SnailBait.prototype =
 		else
 		{
 			this.lastAnimationFrameTime += (now - this.pauseStartTime);
-			this.revealToast("Welcome Back", 3000);
+			
 		}
 	},
 
@@ -1298,6 +1304,9 @@ SnailBait.prototype =
     	localStorage.setItem('score', score); //Saves score upon collision
 	}
 
+	snailBait.BACKGROUND_VELOCITY = 0;
+	snailBait.BOX_MOVEMENT_SPEED = 0;
+
 	//console.log(localStorage.getItem('score'));
     this.startLifeTransition(snailBait.RUNNER_EXPOSION_DURATION);
     setTimeout(function(){
@@ -1319,8 +1328,8 @@ SnailBait.prototype =
 
    endLifeTransition: function()
    {
-      var TIME_RESET_DELAY = 1000,
-          RUN_DELAY = 200;
+      var TIME_RESET_DELAY = 600,
+          RUN_DELAY = 500;
       snailBait.reset();
       score = 0;
       snailBait.BACKGROUND_VELOCITY = 100;
@@ -1330,6 +1339,7 @@ SnailBait.prototype =
       snailBait.sprites[3].left = 2600;
       snailBait.sprites[4].left = 3700;
       snailBait.BOX_MOVEMENT_SPEED = 5;
+      snailBait.BACKGROUND_VELOCITY = 200;
       setTimeout(function(){
         snailBait.setTimeRate(1.0);
         setTimeout(function(){
