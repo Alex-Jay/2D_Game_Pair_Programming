@@ -15,6 +15,9 @@
 
   //Score
   score = 0;
+
+  //Box Movement Speed
+  this.BOX_MOVEMENT_SPEED = 5;
   //Time
   this.playing = true;
   this.timeSystem = new TimeSystem();
@@ -42,7 +45,7 @@
 
 	this.TRACK_1_BASELINE = 323,
 
-	this.SHORT_DELAY = 50,
+	this.SHORT_DELAY = 20,
 	this.OPAQUE = 1.0,
 	this.TRANSPARENT = 0,
 
@@ -86,11 +89,8 @@
 	this.platformVelocity;
 
 	//Key codes
-	this.KEY_D = 68,
-	this.KEY_LEFT = 37,
-	this.KEY_K = 75,
-	this.KEY_RIGHT = 39,
 	this.KEY_P = 80,
+	this.KEY_JUMP = 38,
 
  // Sprite sheet cells................................................
 
@@ -123,6 +123,10 @@
         width: 70, height: this.EXPLOSION_CELLS_HEIGHT }
    ];
 
+   this.boxCells = [
+      { left: 14,   top: 248, 
+        width: 43, height: 39}
+   ];
    // Sprite sheet cells................................................
 
    this.runnerCellsRight = [
@@ -181,7 +185,7 @@
 
       { left: 423, top: 391, 
          width: 38, height: this.RUNNER_CELLS_HEIGHT },
-   ],
+   ];
 
    this.snailBombCells = [
       { left: 40, top: 512, width: 30, height: 20 },
@@ -213,14 +217,20 @@
 			fillStyle: 'rgb(150, 190, 255)',
 			opacity: 1.0,
 			track: 1,
-			pulsate: false
+			pulsate: false,
+			snail: true
 		},
 	];
 
+	this.boxData = [
+      { left: 600,  
+         top: this.TRACK_1_BASELINE - 39},
+      { left: 400,  
+         top: this.TRACK_1_BASELINE - 39},
+   ];
+
    this.smokingHoleData = [
-      { left: 248,  top: this.TRACK_1_BASELINE - 22 },
-      { left: 688,  top: this.TRACK_1_BASELINE + 5 },
-      { left: 1352,  top: this.TRACK_1_BASELINE - 18 },
+      { left: 10,  top: this.TRACK_1_BASELINE},
    ];
    
    this.snailData = [
@@ -504,7 +514,7 @@
           //console.log("Jump platform collision");
           this.processPlatformCollisionDuringJump(sprite, otherSprite);
         }
-        if('snail bomb' === otherSprite.type)
+        if('box' === otherSprite.type)
         {
           //console.log("Bad collision");
           this.processBadGuyCollision(sprite);
@@ -631,6 +641,7 @@
 	//This costs more memory but is faster to iterate through all of the sprites of a particular type
 	this.sprites = [];
 	this.platforms = [];
+	this.boxes = [];
  	this.snails = [];
 
 	this.platformArtist = 
@@ -661,15 +672,11 @@ SnailBait.prototype =
 		this.createPlatformSprites();
 		this.createRunnerSprite	();
 		this.createSnailSprites();
+		this.createBoxSprites();
 		this.initializeSprites();
 		//Add all of the sprites to a single array
 		this.addSpritesToSpriteArray();
 	},
-
-  explode: function()
-  {
-
-  },
 
 	addSpritesToSpriteArray: function()
 	{
@@ -681,6 +688,10 @@ SnailBait.prototype =
 		{
 			this.sprites.push(this.snails[i]);
 		}
+		for(var i =0; i < this.boxes.length; ++i)
+		{
+			this.sprites.push(this.boxes[i]);
+		}
 
 		this.sprites.push(this.runner);
 	},
@@ -688,6 +699,7 @@ SnailBait.prototype =
 	initializeSprites: function()
 	{
 		this.positionSprites(this.snails, this.snailData);
+		this.positionSprites(this.boxes, this.boxData);
 
     this.equipRunner();
     this.armSnails();
@@ -870,6 +882,21 @@ SnailBait.prototype =
 		this.sprites.push(this.runner);
 	},
 
+	createBoxSprites: function()
+	{
+		var box;
+
+		for(var i=0; i<this.boxData.length;++i)
+		{
+			box = new Sprite('box', new SpriteSheetArtist(this.spritesheet, this.boxCells));
+			box.width = 48;
+			box.height = 31;
+			box.value = 200;
+			box.left = 30;
+			this.boxes.push(box);
+		}
+	},
+
 	createSnailSprites: function()
 	{
 		var snail,
@@ -880,6 +907,7 @@ SnailBait.prototype =
 			snail = new Sprite('snail', new SpriteSheetArtist(this.spritesheet, this.snailCells), [this.paceBehaviour, this.snailShootBehaviour, new CycleBehaviour(SNAIL_CYCLE_DURATION, SNAIL_CYCLE_INTERVAL)]);
 			snail.width = this.SNAIL_CELLS_WIDTH;
 			snail.height = this.SNAIL_CELLS_HEIGHT;
+			snail.left = 50;
 			snail.velocityX = snailBait.SNAIL_PACE_VELOCITY;
 			this.snails.push(snail);
 		}
@@ -911,6 +939,10 @@ SnailBait.prototype =
 
 			//Speed up background velocity.
 			snailBait.speedUp();
+			console.log(snailBait.sprites);
+			snailBait.sprites[4].left -= snailBait.BOX_MOVEMENT_SPEED;
+			snailBait.sprites[5].left -= snailBait.BOX_MOVEMENT_SPEED;
+
 
       //if(fps < 50)
       //{
@@ -1085,6 +1117,7 @@ SnailBait.prototype =
 		{
 			//console.log(this.sprite[i].type);
 			sprite = this.sprites[i];
+			//console.log(sprite);
 			if(sprite.visible && this.isSpriteInView(sprite))
 			{
 				this.context.translate(-sprite.hOffset, 0);
@@ -1171,6 +1204,7 @@ SnailBait.prototype =
 
 		snailBait.BACKGROUND_VELOCITY = snailBait.BACKGROUND_VELOCITY + snailBait.SPEED_UP_RATE;
 		snailBait.bgVelocity = snailBait.BACKGROUND_VELOCITY;
+		snailBait.BOX_MOVEMENT_SPEED += 0.001;
 	},
 
 	setPlatformVelocity: function()
@@ -1284,8 +1318,7 @@ SnailBait.prototype =
 		}, fadeDuration);
 	},
 
-  //Effects
-  explode: function(sprite)
+	explode: function(sprite)
   {
     if(!sprite.exploding)
     {
@@ -1426,15 +1459,11 @@ window.addEventListener('keydown', function(e){
   {
     return;
   }
-	else if(key === snailBait.KEY_RIGHT) 
-	{
-		//snailBait.turnRight();
-	}
 	else if(key === snailBait.KEY_P)
 	{
 		snailBait.togglePaused();
 	}
-  else if(key === 38)
+  else if(key === snailBait.KEY_JUMP)
   {
     snailBait.runner.jump();
   }
