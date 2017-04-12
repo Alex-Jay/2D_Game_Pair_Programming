@@ -832,8 +832,6 @@ SnailBait.prototype =
 			//Increment Score every frame.
 			this.score++;
 
-			//Speed up background velocity.
-			snailBait.speedUp();
 			//console.log(snailBait.sprites);
 			snailBait.sprites[2].left -= snailBait.BOX_MOVEMENT_SPEED;
 			snailBait.sprites[3].left -= snailBait.BOX_MOVEMENT_SPEED;
@@ -853,6 +851,9 @@ SnailBait.prototype =
 			{
 				snailBait.sprites[4].left = snailBait.sprites[3].left + Math.floor((Math.random() * 500) + 900);
 			}
+
+			//Speed up background velocity.
+			snailBait.speedUp();
 
 			snailBait.fpsWarningElement.innerHTML = "Highscore: " + localStorage.getItem('score');
 
@@ -1297,7 +1298,7 @@ SnailBait.prototype =
     	localStorage.setItem('score', score); //Saves score upon collision
 	}
 
-	console.log(localStorage.getItem('score'));
+	//console.log(localStorage.getItem('score'));
     this.startLifeTransition(snailBait.RUNNER_EXPOSION_DURATION);
     setTimeout(function(){
       snailBait.endLifeTransition();
@@ -1328,6 +1329,7 @@ SnailBait.prototype =
       snailBait.sprites[2].left = 1900;
       snailBait.sprites[3].left = 2600;
       snailBait.sprites[4].left = 3700;
+      snailBait.BOX_MOVEMENT_SPEED = 5;
       setTimeout(function(){
         snailBait.setTimeRate(1.0);
         setTimeout(function(){
