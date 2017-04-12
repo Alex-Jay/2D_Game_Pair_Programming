@@ -1,9 +1,9 @@
-var SnailBait = function()
+	var SnailBait = function()
 {
 	this.canvas = document.getElementById('game-canvas'),
 	this.context = this.canvas.getContext('2d'),
 	this.fpsElement = document.getElementById('fps'),
-  this.fpsWarningElement = document.getElementById('fps-warning'),
+  	this.fpsWarningElement = document.getElementById('fps-warning'),
 	this.toastElement = document.getElementById('toast'),
 	this.instructionElement = document.getElementById('instructions'),
 	this.copyrightElement = document.getElementById('copyright'),
@@ -11,10 +11,10 @@ var SnailBait = function()
 	this.soundAndMusicElement = document.getElementById('sound-and-music'),
 	this.loadingElement = document.getElementById('loading'),
 	this.loadingTitleElement = document.getElementById('loading-title'),
-	this.loadingAnimatedGIFElement = document.getElementById('loading-animated-gif'),
+	this.loadingAnimatedGIFElement = document.getElementById('loading-animated-gif');
 
   //Score
-  this.score = 0;
+  score = 0;
   //Time
   this.playing = true;
   this.timeSystem = new TimeSystem();
@@ -884,15 +884,13 @@ SnailBait.prototype =
 		}
 	},
 
-
 	//Animation
 	animate: function(now)
 	{
     //Replace the time passed to animate by the browser
     //with our own game time
-    this.score++;
-    console.log(this.score);
-    snailBait.scoreElement.innerHTML = this.score;
+    //console.log(this.score);
+    this.snailBait.scoreElement.innerHTML = this.score;
     now = snailBait.timeSystem.calculateGameTime();
 		if(snailBait.paused)
 		{
@@ -903,6 +901,7 @@ SnailBait.prototype =
 		else
 		{
 			fps = snailBait.calculateFps(now);
+			this.score++;
       //if(fps < 50)
       //{
       //  snailBait.fpsWarningElement.innerHTML = "FPS Low / Under X"; 
@@ -969,6 +968,7 @@ SnailBait.prototype =
     this.timeSystem.start();
     //this.setTimeRate(0.5);
     this.gameStarted = true;
+
 		window.requestAnimationFrame(snailBait.animate);
 	},
 
