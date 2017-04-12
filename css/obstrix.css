@@ -1,5 +1,10 @@
-body{
-	background-color: black;
+html
+{
+  background: url(page_background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 @font-face{
@@ -14,14 +19,10 @@ body{
 	height: 520px;
 }
 
-#fps-warning
-{
-	color: red;
-}
-
 #highScore
 {
-	color: blue;
+	font: 18px gameFont;
+	color: gold;
 }
 
 #game-canvas{
@@ -52,7 +53,7 @@ body{
 	position: absolute;
 	margin-top: -2em;
 	z-index: 1;
-	color: yellow;
+	color: green;
 	text-shadow: 1px 1px 1px rgb(0,0,80);
 	font: bold 20px fantasy;
 
@@ -64,7 +65,7 @@ body{
 #score{
 	font: 46px gameFont;
 	text-align: center;
-	color: #ff0;
+	color: green;
 	text-shadow: 2px 2px 4px rgba(0,0,80, 1.0);
 
 	display: none;
@@ -118,31 +119,6 @@ body{
 	display: none;
 	opacity: 0;
 	transition: opacity 5s;
-}
-
-#sound-and-music{
-	position: absolute;
-	margin-left: 5px;
-	margin-top: 9px;
-	color: #ff0;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-	background: rgba(0,0,0,0.1);
-	border-radius: 5px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-
-	display: none;
-	opacity: 0;
-	transition: opacity 5s;
-}
-
-.checkbox-div{
-	display: inline;
-	text-shadow: 1px 1px 1px blue;
-}
-
-#sound-checkbox-div{
-	margin-right: 10px;
 }
 
 #loading{

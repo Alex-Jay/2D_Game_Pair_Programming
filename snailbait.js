@@ -481,7 +481,7 @@
 
 	        setSpriteVelocity: function(sprite, now) {
 	            sprite.velocityY = sprite.initialVelocityY + snailBait.GRAVITY_FORCE * (sprite.fallTimer.getElapsedTime(now) / 1000) * snailBait.PIXELS_PER_METRE;
-	            console.log(sprite.velocityY);
+	            //console.log(sprite.velocityY);
 	        },
 
 	        calculateVerticalDrop: function(sprite, now, lastAnimationFrameTime) {
@@ -501,7 +501,7 @@
 	            var dropDistance;
 	            this.setSpriteVelocity(sprite, now);
 	            dropDistance = this.calculateVerticalDrop(sprite, now, lastAnimationFrameTime);
-	            console.log(dropDistance);
+	            //console.log(dropDistance);
 	            if (!this.willFallBelowCurrentTrack(sprite, dropDistance)) {
 	                sprite.top += dropDistance;
 	            } else {
@@ -773,9 +773,14 @@
 
 	            snailBait.highScoreElement.innerHTML = "Highscore: " + localStorage.getItem('score');
 
-	            if (fps <= 30 && snailBait.playing === true) //Show Warning Message On Frame Drop
+	            if (fps <= 30 && !snailBait.paused) //Show Warning Message On Frame Drop
 	            {
+	            	snailBait.fpsElement.style.color = 'red';
 	                snailBait.revealToast("FPS Low. Problems Might Occur", 3000);
+	            }
+	            else
+	            {
+	            	snailBait.fpsElement.style.color = 'green';
 	            }
 
 	            snailBait.draw(now);
@@ -877,7 +882,7 @@
 	    },
 
 	    dimControls: function() {
-	        var FINAL_OPACITY = 0.5;
+	        var FINAL_OPACITY = 1;
 	        snailBait.instructionElement.style.opacity = FINAL_OPACITY;
 	    },
 
