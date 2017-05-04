@@ -153,4 +153,69 @@ html
 	display: none;
 }
 
+/* mobile code gotten from powerpoint on moodle*/
+.snailbait-mobile-toast {
+   position: absolute;
+   border-radius: 10px;
 
+   font: 30px fantasy;
+   text-align: center;
+   text-shadow: 1px 1px 1px rgb(0,0,0);
+
+   color: yellow;
+
+   transition: opacity 1s;
+
+   display: none;
+   z-index: 1; 
+   opacity: 0;
+}
+
+#snailbait-mobile-start-toast {
+   width: 800px;
+   height: 400px;
+}
+
+#snailbait-mobile-welcome-toast {
+   width: 800px;
+   height: 400px;
+}
+
+.snailbait-welcome-link {
+   font: 40px fantasy;
+   color: gold;
+   text-shadow: 2px 2px 2px blue;
+}
+
+.snailbait-welcome-link:hover {
+   color: yellow;
+}
+
+#snailbait-welcome {
+   text-align: center;
+   padding: 25px;
+   margin-bottom: 30px;
+   font: 36px fantasy;
+   text-shadow: 1px 1px 1px black;
+}
+
+#snailbait-welcome-instructions {
+   font: 18px fantasy;
+   text-shadow: 1px 1px 1px black;
+   color: white;
+}
+
+#snailbait-mobile-instructions {
+   margin-left: 155px;
+   padding-left: 5px;
+   padding-top: 10px;
+   height: 2em;
+
+   color: #ff0;
+   font-size: 0.95em;
+
+   transition: opacity 5s;
+
+   display: none;
+   opacity: 0;
+}

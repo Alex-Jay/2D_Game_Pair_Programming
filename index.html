@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!--not sure if this has to be here <meta name="viewport" content="width=900"/>-->
 		<title>Obstrix</title>
 		<link rel='stylesheet' href='css/obstrix.css'/>
 	</head>
@@ -20,6 +21,41 @@
 			</div>
 			<canvas id='game-canvas' width='800' height = '400'>
 			</canvas>
+
+			<!--mobile code gotten from powerpoint on moodle-->
+			<div id='snailbait-mobile-welcome-toast' class='snailbait-mobile-toast'>
+			 	<div id='snailbait-welcome'>
+			 		Avoid the box by jumping over them.
+
+			 		<div id= 'snailbait-welcome-instructions'>
+			 			<p> <a href='#' class='snailbait-welcome-link'
+			 				id = 'snailbait-welcome-start-link'>
+			 				Start the game</a></p>
+			 			<p> <a href='#' class='snailbait-welcome-link'
+			 				id = 'snailbait-show-how-link'>
+			 				Show how to use the controls</a></p>
+			 		</div>
+			 	</div>
+			</div>
+		<div id='snailbait-mobile-start-toast' class='snailbait-mobile-toast'>
+ 			<a href='#' class = 'snailbait-welcome-link' id='snailbait-mobile-start-link'>Start </a>
+ 		</div>
+
+ 	 	<div id='snailbait-mobile-instructions'>
+            <div class='snailbait-keys'> Up
+            	<div class='snailbait-explanation'>Jump</div>
+            </div>
+
+            <div class='snailbait-keys'>Focus 
+            	<div class='snailbait-explanation'>focus</div>
+            </div>
+
+            <div class='snailbait-keys'>
+               p 
+               <div class='snailbait-explanation'>pause</div>
+            </div>
+     	</div> 	
+
 			<!-- Bottom CHROME -->
 			<!--Instructions for game controls.........-->
 			<div id = 'instructions'>

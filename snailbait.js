@@ -12,6 +12,14 @@
 	        this.loadingTitleElement = document.getElementById('loading-title'),
 	        this.loadingAnimatedGIFElement = document.getElementById('loading-animated-gif');
 
+	     //Mobile
+	    this.mobileInstructionsVisible = false,
+	    this.mobileStartToast = document.getElementById('snailbait-mobile-start-toast'),
+	    this.mobileWelcomeToast = document.getElementById('snailbait-mobile-welcome-toast'),
+	    this.welcomeStartLink = document.getElementById('snailbait-welcome-start-link'),
+	    this.showHowLink = document.getElementById('snailbait-show-how-link'),
+	    this.mobileStartLink = document.getElementById('snailbait-mobile-start-link'),
+	    
 	    //Score
 	    score = 0;
 
@@ -833,7 +841,19 @@
 	    startGame: function() {
 	        //this.togglePaused();
 	        this.revealGame();
-	        this.revealInitialToast();
+
+	        if(snailBait.mobile)
+		    {
+		        this.fadeInElements(snailBait.mobileWelcomeToast);
+		        //this.mobileInstructionsVisible = true;
+		    }
+		    else
+		    {   
+			    this.revealInitialToast();
+			    //this.playing = true;
+		    }
+		    
+	        //this.revealInitialToast();
 	        //Initially Sets the player to move right
 	        snailBait.turnRight();
 	        snailBait.putSpriteOnTrack(snailBait.runner, 1);
@@ -843,6 +863,8 @@
 
 	        window.requestAnimationFrame(snailBait.animate);
 	    },
+
+
 
 	    setTimeRate: function(rate) {
 	        this.timeRate = rate;
@@ -923,8 +945,13 @@
 	        this.drawBoxes();
 	        //console.log("About to call drawSprites");
 	        this.drawSprites();
+	        if(snailBait.mobileInstructionsVisible)
+		    {
+		        snailBait.drawMobileInstructions();
+		    }
 	        //snailBait.drawRunner();
 	        //snailBait.drawPlatforms();
+	       	
 	    },
 
 	    updateSprites: function(now) {
@@ -939,6 +966,20 @@
 	        }
 	    },
 
+	    //lines 968-979 & 996-1071 gotten from powerpoint on moodle
+	    detectMobile: function()
+		{
+      		snailBait.mobile = 'ontouchstart' in window;
+      		console.log(snailBait.mobile);
+   		},
+
+   		resizeElement: function(element, w, h)
+	   	{
+	    	element.style.width = w + 'px';
+	    	element.style.height = h + 'px';
+	   	},
+
+
 	    drawSprites: function() {
 	        var sprite;
 	        for (var i = 0; i < this.sprites.length; i++) {
@@ -952,6 +993,85 @@
 	            }
 	        }
 	    },
+
+	   	fitScreen: function()
+	   	{
+	    	var arenaSize = snailBait.calculateArenaSize(snailBait.getViewportSize());
+	    	snailBait.resizeElementsToFitScreen(arenaSize.width, arenaSize.height);
+	   	},
+
+	   	getViewportSize: function()
+		{
+			return { 
+		    width: Math.max(document.documentElement.clientWidth 
+		    || window.innerWidth || 0), 
+		    height: Math.max(document.documentElement.clientHeight 
+		    || window.innerHeight || 0)};
+		},
+
+
+   		drawMobileInstructions: function()
+   		{
+      		var cw = this.canvas.width,
+          	ch = this.canvas.height,
+          	TOP_LINE_OFFSET = 115,
+          	LINE_HEIGHT = 40;
+
+      	this.context.save();
+      	this.initializeContextForMobileInstruction();
+      	this.drawMobileDivider(cw, ch);
+      	this.drawMobileInstructionsLeft(cw, ch, TOP_LINE_OFFSET, LINE_HEIGHT);
+      	this.drawMobileInstructionsRight(cw, ch, TOP_LINE_OFFSET, LINE_HEIGHT);
+      	this.context.restore();
+   		},
+
+	   initializeContextForMobileInstruction: function()
+	   {
+	      	this.context.textAlign = 'center';
+	      	this.context.textBaseLine = 'middle';
+	      	this.context.font = '26px fantasy';
+	      	this.context.shadowBlur = 2;
+	      	this.context.shadowOffsetX = 2;
+	      	this.context.shadowOffsetY = 2;
+	      	this.context.shadowColor = 'black';
+	      	this.context.fillStyle = 'yellow';
+	      	this.context.strokeStyle = 'yellow';
+	    },
+
+	   drawMobileDivider: function(cw, ch)
+	   {
+	      	this.context.beginPath();
+	      	this.context.moveTo(cw/2, 0);
+	      	this.context.lineTo(cw/2, ch);
+	    	this.context.stoke();
+	   	},
+
+   		drawMobileInstructionsLeft: function(cw, ch, topLineOffset, lineHeight)
+   		{
+      		this.context.font = '32px fantasy';
+      		this.context.fillText('Tap on this side to:', cw/4, ch/2-topLineOffset);
+      		this.context.fillStyle = 'white';
+      		this.context.font = 'italic 26px fantasy';
+      		this.context.fillText('Turn around when running right', cw/4,
+        	ch/2 - topLineOffset + 2 * lineHeight);
+      		this.context.fillText('Jump when running left', cw/4,
+         	ch/2 - topLineOffset + 3 * lineHeight);
+   		},
+
+   		drawMobileInstructionsRight: function(cw, ch, topLineOffset, lineHeight)
+   		{
+      		this.context.font = '32px fantasy';
+      		this.context.fillText('Tap on this side to:', 3*cw/4, ch/2-topLineOffset);
+      		this.context.fillStyle = 'white';
+      		this.context.font = 'italic 26px fantasy';
+      		this.context.fillText('Turn around when running left', 3*cw/4,
+         	ch/2 - topLineOffset + 2 * lineHeight);
+      		this.context.fillText('Jump when running right', 3*cw/4,
+         	ch/2 - topLineOffset + 3 * lineHeight);
+      		this.context.fillText('Start running right', 3*cw/4,
+         	ch/2 - topLineOffset + 5 * lineHeight);
+   		},
+
 
 	    isSpriteInView: function(sprite) {
 	        return sprite.left + sprite.width > sprite.hOffset && sprite.left < sprite.hOffset + this.canvas.width;
@@ -1250,6 +1370,107 @@
 	        }
 	    }
 
+	
+	    //code from line 1373-1470 gotten of powerpiont on moodle
+		calculateArenaSize: function(viewportSize)
+	   	{
+	    	var DESKTOP_ARENA_WIDTH = 800,
+		    DESKTOP_ARENA_HEIGHT = 520,
+		    arenaHeight,
+		    arenaWidth;
+		    //maintain aspect ratio
+		    arenaHeight = viewportSize.width*(DESKTOP_ARENA_HEIGHT/DESKTOP_ARENA_WIDTH);
+		    if(arenaHeight < viewportSize.height) //Height fits
+		    {
+		        arenaWidth = viewportSize.width;
+		    }
+		    else //Height does not fit
+		    {
+		        arenaHeight = viewportSize.height;
+		        arenaWidth = arenaHeight*(DESKTOP_ARENA_WIDTH/DESKTOP_ARENA_HEIGHT);
+		    }
+		    if(arenaWidth > DESKTOP_ARENA_WIDTH)
+		    {
+		    	arenaWidth = DESKTOP_ARENA_WIDTH;
+		    }
+		    if(arenaHeight > DESKTOP_ARENA_HEIGHT)
+		    {
+		        arenaHeight = DESKTOP_ARENA_HEIGHT;
+		    }
+		    return { 
+		        width:  arenaWidth, 
+		        height: arenaHeight 
+		    };
+		},
+
+	   resizeElementsToFitScreen: function(arenaWidth, arenaHeight)
+	   {
+	      	snailBait.resizeElement(document.getElementById('arena'), arenaWidth,
+	       	arenaHeight);
+	      	snailBait.resizeElement(snailBait.mobileWelcomeToast, arenaWidth,
+	        arenaHeight);
+	      	snailBait.resizeElement(snailBait.mobileStartToast, arenaWidth,
+	        arenaHeight);
+	    },
+
+	    addTouchEventHandlers: function()
+   		{
+      		snailBait.canvas.addEventListener('touchstart', snailBait.touchStart);
+      		snailBait.canvas.addEventListener('touchend', snailBait.touchEnd);
+   		},
+
+   		//lines 1422- 1473 have to be changed to fit the comtrols for moblie
+   		touchStart: function(e)
+   		{
+      		if(snailBait.playing)
+      		{
+         		//Prevent players from inadvertently dragging the game canvas
+         		e.preventDefault();
+      		}
+   		},
+
+   		touchEnd: function(e)
+   		{
+      		var x = e.changedTouches[0].pageX;
+      		if(snailBait.playing)
+      		{
+         		if(x < snailBait.canvas.width/2)
+         		{
+            		snailBait.processLeftTap();
+         		}
+	         	else if(x > snailBait.canvas.width/2)
+	         	{
+	            	snailBait.processRightTap();
+	         	}
+	         	//Prevent players from double tapping to zoom 
+	         	//when the game is playing
+	         	e.preventDefault();
+	      	}
+   		},
+
+   		processLeftTap: function()
+   		{
+      		if(snailBait.runner.direction === snailBait.RIGHT)
+      		{
+         		snailBait.turnLeft();
+      		}
+      		else
+      		{
+         		snailBait.runner.jump();
+      		}
+   		},
+
+   		processRightTap: function()
+   		{
+      		if(snailBait.runner.direction === snailBait.LEFT)
+      		{
+         		snailBait.turnRight();
+      		}
+      		else
+      		{
+         		snailBait.runner.jump();
+      		}
+   		},
 	};
 
 	window.addEventListener('keydown', function(e) {
@@ -1316,5 +1537,57 @@
 
 
 	var snailBait = new SnailBait();
+	//lines 1539-1589 gotten from powerpoint on moodle
+	snailBait.welcomeStartLink.addEventListener('click',
+    function(e)
+    {
+       var FADE_DURATION = 1000;
+       snailBait.playSound(snailBait.coinSound);
+       snailBait.fadeOutElements(snailBait.mobileWelcomeToast, FADE_DURATION);
+       snailBait.playing = true;
+    });
+
+	snailBait.mobileStartLink.addEventListener('click',
+   	function(e)
+   	{
+    	var FADE_DURATION = 1000;
+    	snailBait.fadeOutElements(snailBait.mobileStartToast, FADE_DURATION);
+    	snailBait.mobileInstructionsVisible = false;
+    	snailBait.playSound(snailBait.coinSound);
+    	snailBait.playing = true;
+   	});
+
+   	snailBait.showHowLink.addEventListener('click',
+   	function(e)
+   	{
+    	var FADE_DURATION = 1000;
+      	snailBait.fadeOutElements(snailBait.mobileWelcomeToast, FADE_DURATION);
+      	snailBait.drawMobileInstructions();
+      	snailBait.revealMobileStartToast();
+      	snailBait.mobileInstructionsVisible = true;
+   	});
+
 	snailBait.initializeImages();
 	snailBait.createSprites();
+	
+	snailBait.detectMobile();
+	if(snailBait.mobile)
+	{
+	   //mobile specific stuff - touch handler etc
+	   snailBait.instructionsElement = document.getElementById('snailbait-mobile-instructions');
+	   snailBait.addTouchEventHandlers();
+
+	   /*if(/android/i.text(navigator.userAgent))
+	   {
+	      snailBait.cannonSound.position = 5.4;
+	      snailBait.coinSound.position = 4.8;
+	      snailBait.electricityFlowingSound.position = 0.3;
+	      snailBait.explosionSound.position = 2.8;
+	      snailBait.pianoSound.position = 3.5;
+	      snailBait.thudSound.position = 1.8;
+	   }*/
+	}
+
+	snailBait.fitScreen();
+	window.addEventListener("resize", snailBait.fitScreen());
+	window.addEventListener("orientationchange", snailBait.fitScreen());
