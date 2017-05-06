@@ -845,7 +845,7 @@
 	        if(snailBait.mobile)
 		    {
 		        this.fadeInElements(snailBait.mobileWelcomeToast);
-		        //this.mobileInstructionsVisible = true;
+		        this.mobileInstructionsVisible = true;
 		    }
 		    else
 		    {   
@@ -860,8 +860,8 @@
 	        this.timeSystem.start();
 	        //this.setTimeRate(0.5);
 	        this.gameStarted = true;
-
-	        window.requestAnimationFrame(snailBait.animate);
+	        window.requestAnimationFrame(this.animate);
+	        //window.requestAnimationFrame(snailBait.animate);
 	    },
 
 
@@ -970,7 +970,7 @@
 	    detectMobile: function()
 		{
       		snailBait.mobile = 'ontouchstart' in window;
-      		console.log();
+      		console.log(snailBait.mobile);
    		},
 
    		resizeElement: function(element, w, h)
@@ -1025,6 +1025,11 @@
       	this.context.restore();
    		},
 
+   		/*revealMobileStartToast: function(){
+		   snailBait.fadeInElements(snailBait.mobileStartToast);
+		   this.mobileInstructionsVisible = true;
+		}*/
+
 	   initializeContextForMobileInstruction: function()
 	   {
 	      	this.context.textAlign = 'center';
@@ -1052,10 +1057,8 @@
       		this.context.fillText('Tap on this side to:', cw/4, ch/2-topLineOffset);
       		this.context.fillStyle = 'white';
       		this.context.font = 'italic 26px fantasy';
-      		this.context.fillText('Turn around when running right', cw/4,
-        	ch/2 - topLineOffset + 2 * lineHeight);
-      		this.context.fillText('Jump when running left', cw/4,
-         	ch/2 - topLineOffset + 3 * lineHeight);
+      		this.context.fillText('Turn around when running right', cw/4, ch/2 - topLineOffset + 2 * lineHeight);
+      		this.context.fillText('Jump when running left', cw/4, ch/2 - topLineOffset + 3 * lineHeight);
    		},
 
    		drawMobileInstructionsRight: function(cw, ch, topLineOffset, lineHeight)
@@ -1064,12 +1067,9 @@
       		this.context.fillText('Tap on this side to:', 3*cw/4, ch/2-topLineOffset);
       		this.context.fillStyle = 'white';
       		this.context.font = 'italic 26px fantasy';
-      		this.context.fillText('Turn around when running left', 3*cw/4,
-         	ch/2 - topLineOffset + 2 * lineHeight);
-      		this.context.fillText('Jump when running right', 3*cw/4,
-         	ch/2 - topLineOffset + 3 * lineHeight);
-      		this.context.fillText('Start running right', 3*cw/4,
-         	ch/2 - topLineOffset + 5 * lineHeight);
+      		this.context.fillText('Turn around when running left', 3*cw/4, ch/2 - topLineOffset + 2 * lineHeight);
+      		this.context.fillText('Jump when running right', 3*cw/4, ch/2 - topLineOffset + 3 * lineHeight);
+      		this.context.fillText('Start running right', 3*cw/4, ch/2 - topLineOffset + 5 * lineHeight);
    		},
 
 
@@ -1524,8 +1524,7 @@
 
 	var snailBait = new SnailBait();
 	//lines 1539-1589 gotten from powerpoint on moodle
-	snailBait.welcomeStartLink.addEventListener('click',
-    function(e)
+	snailBait.welcomeStartLink.addEventListener('click', function(e)
     {
        var FADE_DURATION = 1000;
        snailBait.playSound(snailBait.coinSound);
@@ -1533,8 +1532,7 @@
        snailBait.playing = true;
     });
 
-	snailBait.mobileStartLink.addEventListener('click',
-   	function(e)
+	snailBait.mobileStartLink.addEventListener('click', function(e)
    	{
     	var FADE_DURATION = 1000;
     	snailBait.fadeOutElements(snailBait.mobileStartToast, FADE_DURATION);
@@ -1543,8 +1541,7 @@
     	snailBait.playing = true;
    	});
 
-   	snailBait.showHowLink.addEventListener('click',
-   	function(e)
+   	snailBait.showHowLink.addEventListener('click', function(e)
    	{
     	var FADE_DURATION = 1000;
       	snailBait.fadeOutElements(snailBait.mobileWelcomeToast, FADE_DURATION);
@@ -1565,12 +1562,12 @@
 
 	   if(/android/i.text(navigator.userAgent))
 	   {
-	      snailBait.cannonSound.position = 5.4;
-	      snailBait.coinSound.position = 4.8;
-	      snailBait.electricityFlowingSound.position = 0.3;
-	      snailBait.explosionSound.position = 2.8;
-	      snailBait.pianoSound.position = 3.5;
-	      snailBait.thudSound.position = 1.8;
+	      //snailBait.cannonSound.position = 5.4;
+	      snailBait.coinSoundcoinSound.position = 4.8;
+	      //snailBait.electricityFlowingSound.position = 0.3;
+	      //snailBait.explosionSound.position = 2.8;
+	      //snailBait.pianoSound.position = 3.5;
+	      //snailBait.thudSound.position = 1.8;
 	   }
 	}
 
