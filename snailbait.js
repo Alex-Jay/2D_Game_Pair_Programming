@@ -970,7 +970,7 @@
 	    detectMobile: function()
 		{
       		snailBait.mobile = 'ontouchstart' in window;
-      		console.log(snailBait.mobile);
+      		console.log();
    		},
 
    		resizeElement: function(element, w, h)
@@ -1368,10 +1368,10 @@
 	        for (var i = 0; i < snailBait.sprites.length; ++i) {
 	            snailBait.sprites[i].visible = true;
 	        }
-	    }
+	    },
 
 	
-	    //code from line 1373-1470 gotten of powerpiont on moodle
+	    //code from line 1375-1474 gotten of powerpiont on moodle
 		calculateArenaSize: function(viewportSize)
 	   	{
 	    	var DESKTOP_ARENA_WIDTH = 800,
@@ -1450,26 +1450,12 @@
 
    		processLeftTap: function()
    		{
-      		if(snailBait.runner.direction === snailBait.RIGHT)
-      		{
-         		snailBait.turnLeft();
-      		}
-      		else
-      		{
-         		snailBait.runner.jump();
-      		}
+      		snailBait.runner.focus();
    		},
 
    		processRightTap: function()
    		{
-      		if(snailBait.runner.direction === snailBait.LEFT)
-      		{
-         		snailBait.turnRight();
-      		}
-      		else
-      		{
-         		snailBait.runner.jump();
-      		}
+         	snailBait.runner.jump();
    		},
 	};
 
@@ -1577,7 +1563,7 @@
 	   snailBait.instructionsElement = document.getElementById('snailbait-mobile-instructions');
 	   snailBait.addTouchEventHandlers();
 
-	   /*if(/android/i.text(navigator.userAgent))
+	   if(/android/i.text(navigator.userAgent))
 	   {
 	      snailBait.cannonSound.position = 5.4;
 	      snailBait.coinSound.position = 4.8;
@@ -1585,7 +1571,7 @@
 	      snailBait.explosionSound.position = 2.8;
 	      snailBait.pianoSound.position = 3.5;
 	      snailBait.thudSound.position = 1.8;
-	   }*/
+	   }
 	}
 
 	snailBait.fitScreen();
