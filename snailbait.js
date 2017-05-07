@@ -11,7 +11,6 @@
 	        this.loadingElement = document.getElementById('loading'),
 	        this.loadingTitleElement = document.getElementById('loading-title'),
 	        this.loadingAnimatedGIFElement = document.getElementById('loading-animated-gif');
-
 	     //Mobile
 	    this.mobileInstructionsVisible = false,
 	    this.mobileStartToast = document.getElementById('snailbait-mobile-start-toast'),
@@ -970,6 +969,7 @@
 	    detectMobile: function()
 		{
       		snailBait.mobile = 'ontouchstart' in window;
+      		snailBait.instructionElement.style.opacity = 0;
       		console.log(snailBait.mobile);
    		},
 
@@ -1531,32 +1531,6 @@
 
 
 	var snailBait = new SnailBait();
-	//lines 1539-1589 gotten from powerpoint on moodle
-	snailBait.welcomeStartLink.addEventListener('click', function(e)
-    {
-       var FADE_DURATION = 1000;
-       snailBait.playSound(snailBait.coinSound);
-       snailBait.fadeOutElements(snailBait.mobileWelcomeToast, FADE_DURATION);
-       snailBait.playing = true;
-    });
-
-	snailBait.mobileStartLink.addEventListener('click', function(e)
-   	{
-    	var FADE_DURATION = 1000;
-    	snailBait.fadeOutElements(snailBait.mobileStartToast, FADE_DURATION);
-    	snailBait.mobileInstructionsVisible = false;
-    	snailBait.playSound(snailBait.coinSound);
-    	snailBait.playing = true;
-   	});
-
-   	snailBait.showHowLink.addEventListener('click', function(e)
-   	{
-    	var FADE_DURATION = 1000;
-      	snailBait.fadeOutElements(snailBait.mobileWelcomeToast, FADE_DURATION);
-      	snailBait.drawMobileInstructions();
-      	snailBait.revealMobileStartToast();
-      	snailBait.mobileInstructionsVisible = true;
-   	});
 
 	snailBait.initializeImages();
 	snailBait.createSprites();
