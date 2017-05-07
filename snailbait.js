@@ -1442,7 +1442,6 @@
          		if(x < snailBait.canvas.width/2)
          		{
             		snailBait.processLeftTap();
-            		snailBait.setTimeRate(1);
          		}
 	         	else if(x > snailBait.canvas.width/2)
 	         	{
@@ -1456,16 +1455,7 @@
 
    		processLeftTap: function()
    		{
-   			if(!snailBait.touchStart)
-   			{
-   				console.log("Touch Start.");
-   				//snailBait.setTimeRate(0.5);
-   			}
-   			else
-   			{
-   				console.log("Touch End.");
-   				//snailBait.setTimeRate(1);
-   			}
+   			snailBait.setTimeRate(1);
    		},
 
    		processRightTap: function()
