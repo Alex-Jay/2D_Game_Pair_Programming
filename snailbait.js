@@ -1048,7 +1048,7 @@
 	      	this.context.beginPath();
 	      	this.context.moveTo(cw/2, 0);
 	      	this.context.lineTo(cw/2, ch);
-	    	this.context.stoke();
+	    	this.context.stroke();
 	   	},
 
    		drawMobileInstructionsLeft: function(cw, ch, topLineOffset, lineHeight)
@@ -1419,7 +1419,7 @@
       		snailBait.canvas.addEventListener('touchend', snailBait.touchEnd);
    		},
 
-   		//lines 1422- 1473 have to be changed to fit the comtrols for moblie
+   		//lines 1422- 1473 have to be changed to fit the controls for moblie
    		touchStart: function(e)
    		{
       		if(snailBait.playing)
@@ -1450,7 +1450,7 @@
 
    		processLeftTap: function()
    		{
-      		snailBait.runner.focus();
+      		snailBait.setTimeRate(0.5);
    		},
 
    		processRightTap: function()
