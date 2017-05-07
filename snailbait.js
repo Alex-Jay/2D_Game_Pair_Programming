@@ -783,19 +783,17 @@
 	            	snailBait.speedUp();
 	        	}
 
-	            console.log(snailBait.runBehaviour.lastAdvanceTime);
-
 	            snailBait.highScoreElement.innerHTML = "Highscore: " + localStorage.getItem('score');
-
-	            if (fps <= 30 && !snailBait.paused) //Show Warning Message On Frame Drop
+	            snailBait.fpsElement.style.color = 'green';
+	            console.log(now);
+	            setTimeout(function() {
+	            if (fps <= 30 && !snailBait.paused && now > 3000 && snailBait.playing === true) //Show Warning Message On Frame Drop
 	            {
-				    snailBait.fpsElement.style.color = 'red';
+	            	snailBait.toastElement.style.font = '18px fantasy';
 				    snailBait.revealToast("FPS Low. Problems Might Occur", 3000);
-	            }
-	            else
-	            {
-	            	snailBait.fpsElement.style.color = 'green';
-	            }
+
+	            }}, 500);
+
 
 	            snailBait.draw(now);
 	            snailBait.lastAnimationFrameTime = now;
@@ -1193,7 +1191,6 @@
 	            this.pauseStartTime = now;
 	        } else {
 	            this.lastAnimationFrameTime += (now - this.pauseStartTime);
-
 	        }
 	    },
 
