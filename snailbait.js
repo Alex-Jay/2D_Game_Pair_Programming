@@ -782,8 +782,8 @@
 
 	            if (fps <= 30 && !snailBait.paused) //Show Warning Message On Frame Drop
 	            {
-	            	snailBait.fpsElement.style.color = 'red';
-	                snailBait.revealToast("FPS Low. Problems Might Occur", 3000);
+				    snailBait.fpsElement.style.color = 'red';
+				    snailBait.revealToast("FPS Low. Problems Might Occur", 3000);
 	            }
 	            else
 	            {
@@ -941,12 +941,15 @@
 	        snailBait.setOffsets(now);
 	        snailBait.drawBackground();
 	        this.updateSprites(now);
-	        this.drawBoxes();
 	        //console.log("About to call drawSprites");
 	        this.drawSprites();
 	        if(snailBait.mobileInstructionsVisible)
 		    {
 		        snailBait.drawMobileInstructions();
+		    }
+		    else
+		    {
+		    	this.drawBoxes();
 		    }
 	        //snailBait.drawRunner();
 	        //snailBait.drawPlatforms();
