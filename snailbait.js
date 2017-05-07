@@ -271,6 +271,7 @@
 	        lastAdvanceTime: 0,
 
 	        execute: function(sprite, now, fps, context, lastAnimationFrameTime) {
+	        	this.nowCopy = now;
 	            if (sprite.runAnimationRate === 0) {
 	                return;
 	            }
@@ -766,7 +767,7 @@
 	        } else {
 	            fps = snailBait.calculateFps(now);
 
-	            if (!snailBait.hasDied) //Stop counting up if the player dies
+	            if (!snailBait.hasDied && snailBait.mobileInstructionsVisible === false) //Stop counting up if the player dies
 	            {
 	                //Increment and Write Score every frame.
 	                this.score++;
@@ -776,7 +777,12 @@
 	            this.snailBait.scoreElement.innerHTML = this.score;
 
 	            //Speed up background velocity and box velocity.
-	            snailBait.speedUp();
+	            if(snailBait.mobileInstructionsVisible === false)
+	            {
+	            	snailBait.speedUp();
+	        	}
+
+	            console.log(snailBait.runBehaviour.lastAdvanceTime);
 
 	            snailBait.highScoreElement.innerHTML = "Highscore: " + localStorage.getItem('score');
 
