@@ -637,6 +637,7 @@
 	        this.runner.stopJumping = function() {
 	            this.descendTimer.stop();
 	            this.jumping = false;
+	            this.runAnimationRate = 20;
 	        };
 	    },
 
