@@ -1025,10 +1025,10 @@
       	this.context.restore();
    		},
 
-   		/*revealMobileStartToast: function(){
+   		revealMobileStartToast: function(){
 		   snailBait.fadeInElements(snailBait.mobileStartToast);
 		   this.mobileInstructionsVisible = true;
-		}*/
+		},
 
 	   initializeContextForMobileInstruction: function()
 	   {
@@ -1450,7 +1450,16 @@
 
    		processLeftTap: function()
    		{
-      		snailBait.setTimeRate(0.5);
+   			if(!snailBait.touchStart)
+   			{
+   				console.log("Touch Start.");
+   				//snailBait.setTimeRate(0.5);
+   			}
+   			else
+   			{
+   				console.log("Touch End.");
+   				//snailBait.setTimeRate(1);
+   			}
    		},
 
    		processRightTap: function()
