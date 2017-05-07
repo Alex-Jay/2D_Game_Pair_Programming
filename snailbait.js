@@ -1450,6 +1450,9 @@
 	         	//Prevent players from double tapping to zoom 
 	         	//when the game is playing
 	         	e.preventDefault();
+
+	         	//Hide Instructions After Initial Tap
+	         	snailBait.mobileInstructionsVisible = false;
 	      	}
    		},
 
