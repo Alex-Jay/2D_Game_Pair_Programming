@@ -969,8 +969,8 @@
 	    detectMobile: function()
 		{
       		snailBait.mobile = 'ontouchstart' in window;
-      		snailBait.instructionElement.style.opacity = 0;
-      		console.log(snailBait.mobile);
+      		snailBait.instructionElement.style.visibility = "hidden";
+      		snailBait.copyrightElement.style.visibility = "hidden";
    		},
 
    		resizeElement: function(element, w, h)
