@@ -33,6 +33,11 @@ html
 	transition: opacity 3s;
 }
 
+#focus-energy{
+	font: 18px gameFont;
+	color: gold;
+}
+
 #toast{
 	position: absolute;
 	margin-left: 100px;

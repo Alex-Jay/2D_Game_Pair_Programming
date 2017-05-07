@@ -33,6 +33,7 @@
 
 	    //Slow-Mo Energy
 	    this.SLOW_MOTION_ENERGY = 100;
+
 	    //Time
 	    this.playing = true;
 	    this.timeSystem = new TimeSystem();
@@ -1340,6 +1341,7 @@
 	            RUN_DELAY = 500;
 	        snailBait.reset();
 	        score = 0;
+	        this.SLOW_MOTION_ENERGY = 100;
 	        snailBait.BACKGROUND_VELOCITY = 100;
 	        snailBait.turnRight();
 	        snailBait.sprites[1].left = 0;
