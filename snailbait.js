@@ -3,6 +3,7 @@
 	        this.context = this.canvas.getContext('2d'),
 	        this.fpsElement = document.getElementById('fps'),
 	        this.fpsWarningElement = document.getElementById('fps-warning'),
+	        this.focusEnergy = document.getElementById('focus-energy'),
 	        this.highScoreElement = document.getElementById('highScore'),
 	        this.toastElement = document.getElementById('toast'),
 	        this.instructionElement = document.getElementById('instructions'),
@@ -776,6 +777,7 @@
 
 	            //Draw Score on screen every frame
 	            this.snailBait.scoreElement.innerHTML = this.score;
+	            this.snailBait.focusEnergy.innerHTML = snailBait.SLOW_MOTION_ENERGY;
 
 	            //Speed up background velocity and box velocity.
 	            if(snailBait.mobileInstructionsVisible === false)
@@ -783,9 +785,18 @@
 	            	snailBait.speedUp();
 	        	}
 
+	        	if(snailBait.timeRate === 0.5 && snailBait.SLOW_MOTION_ENERGY > 0)
+	        	{
+	        		snailBait.SLOW_MOTION_ENERGY -= 0.5;
+	        	}
+
+	        	if(snailBait.SLOW_MOTION_ENERGY <= 0)
+	        	{
+	        		snailBait.setTimeRate(1);
+	        	}
+
 	            snailBait.highScoreElement.innerHTML = "Highscore: " + localStorage.getItem('score');
 	            snailBait.fpsElement.style.color = 'green';
-	            console.log(now);
 	            setTimeout(function() {
 	            if (fps <= 30 && !snailBait.paused && now > 3000 && snailBait.playing === true) //Show Warning Message On Frame Drop
 	            {
@@ -925,19 +936,21 @@
 	    },
 
 	    drawBoxes: function() {
+	    	var LEFT_SIDE_OF_SCREEN = -100;
 	        snailBait.sprites[2].left -= snailBait.BOX_MOVEMENT_SPEED;
 	        snailBait.sprites[3].left -= snailBait.BOX_MOVEMENT_SPEED;
 	        snailBait.sprites[4].left -= snailBait.BOX_MOVEMENT_SPEED;
-	        if (snailBait.sprites[2].left < -100) {
-	            snailBait.sprites[2].left = snailBait.sprites[4].left + Math.floor((Math.random() * 100) + 200);
+
+	        if (snailBait.sprites[2].left < LEFT_SIDE_OF_SCREEN) {
+	            snailBait.sprites[2].left = snailBait.sprites[4].left + Math.floor((Math.random() * 1900/4) + Math.random() * 50);
 	        }
 
-	        if (snailBait.sprites[3].left < -100) {
-	            snailBait.sprites[3].left = snailBait.sprites[2].left + Math.floor((Math.random() * 200) + 600);
+	        if (snailBait.sprites[3].left < LEFT_SIDE_OF_SCREEN) {
+	            snailBait.sprites[3].left = snailBait.sprites[2].left + Math.floor((Math.random() * 2700/4) + Math.random() * 80);
 	        }
 
-	        if (snailBait.sprites[4].left < -100) {
-	            snailBait.sprites[4].left = snailBait.sprites[3].left + Math.floor((Math.random() * 50) + 900);
+	        if (snailBait.sprites[4].left < LEFT_SIDE_OF_SCREEN) {
+	            snailBait.sprites[4].left = snailBait.sprites[3].left + Math.floor((Math.random() * 3600/4) + Math.random() * 70);
 	        }
 	    },
 
@@ -1434,7 +1447,7 @@
       		{
          		if(x < snailBait.canvas.width/2)
          		{
-            		snailBait.setTimeRate(0.5);
+			        snailBait.setTimeRate(0.5);
          		}
          		//Prevent players from inadvertently dragging the game canvas
          		e.preventDefault();
@@ -1483,7 +1496,11 @@
 	    } else if (key === snailBait.KEY_JUMP) {
 	        snailBait.runner.jump();
 	    } else if (key === snailBait.KEY_X) {
-	        snailBait.setTimeRate(0.5);
+	    	snailBait.setTimeRate(0.5);
+	    	if(snailBait.SLOW_MOTION_ENERGY <= 0)
+	    	{
+	    		snailBait.setTimeRate(1);
+	    	}
 	    }
 	});
 
