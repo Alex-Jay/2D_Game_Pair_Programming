@@ -1422,8 +1422,13 @@
    		//lines 1422- 1473 have to be changed to fit the controls for moblie
    		touchStart: function(e)
    		{
+   			var x = e.changedTouches[0].pageX;
       		if(snailBait.playing)
       		{
+         		if(x < snailBait.canvas.width/2)
+         		{
+            		snailBait.setTimeRate(0.5);
+         		}
          		//Prevent players from inadvertently dragging the game canvas
          		e.preventDefault();
       		}
@@ -1437,6 +1442,7 @@
          		if(x < snailBait.canvas.width/2)
          		{
             		snailBait.processLeftTap();
+            		snailBait.setTimeRate(1);
          		}
 	         	else if(x > snailBait.canvas.width/2)
 	         	{
@@ -1569,7 +1575,7 @@
 	   snailBait.instructionsElement = document.getElementById('snailbait-mobile-instructions');
 	   snailBait.addTouchEventHandlers();
 
-	   if(/android/i.text(navigator.userAgent))
+	   /*if(/android/i.text(navigator.userAgent))
 	   {
 	      //snailBait.cannonSound.position = 5.4;
 	      snailBait.coinSoundcoinSound.position = 4.8;
@@ -1577,7 +1583,7 @@
 	      //snailBait.explosionSound.position = 2.8;
 	      //snailBait.pianoSound.position = 3.5;
 	      //snailBait.thudSound.position = 1.8;
-	   }
+	   }*/
 	}
 
 	snailBait.fitScreen();
